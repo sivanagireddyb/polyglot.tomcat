@@ -1,0 +1,30 @@
+---
+- name: install httpd
+  yum: name=httpd state=present update_cache=yes
+
+- name: start httpd
+  service: name=httpd state=started
+
+- name: copy default-site config file
+  template:
+    src: /etc/ansible/roles/polyglot.tomcat/files/default-site.conf
+    dest: /etc/httpd/conf.d/default-site.conf
+
+- name: copy deflate config file
+  template:
+    src: /etc/ansible/roles/polyglot.tomcat/files/deflate.conf
+    dest: /etc/httpd/conf.d/deflate.conf
+
+- name: copy expires config file
+  template:
+    src: /etc/ansible/roles/polyglot.tomcat/files/expires.conf
+    dest: /etc/httpd/conf.d/expires.conf
+
+- name: copy httpd.conf config file
+  template:
+    src: /etc/ansible/roles/polyglot.tomcat/files/httpd.conf
+    dest: /etc/httpd/conf/httpd.conf
+
+- name: restart httpd
+  service: name=httpd state=restarted
+
