@@ -26,8 +26,8 @@
     dest: /etc/httpd/conf/httpd.conf
 
 - name: restart httpd
-  service: name=httpd state=restarted
+  service: name=httpd state=enabled
 
 - name: restart httpd
-  service: name=httpd state=enabled
+  service: name=httpd state=restarted
 
