@@ -1,4 +1,11 @@
 ---
+
+- name: update system
+  yum: name=* state=present
+
+- name: install epel repository && update system
+  yum: name=epel-release state=present
+
 - name: install httpd
   yum: name=httpd state=present update_cache=yes
 
@@ -7,22 +14,22 @@
 
 - name: copy default-site config file
   template:
-    src: /etc/ansible/roles/polyglot.tomcat/files/default-site.conf
+    src: default-site.conf
     dest: /etc/httpd/conf.d/default-site.conf
 
 - name: copy deflate config file
   template:
-    src: /etc/ansible/roles/polyglot.tomcat/files/deflate.conf
+    src: deflate.conf
     dest: /etc/httpd/conf.d/deflate.conf
 
 - name: copy expires config file
   template:
-    src: /etc/ansible/roles/polyglot.tomcat/files/expires.conf
+    src: expires.conf
     dest: /etc/httpd/conf.d/expires.conf
 
 - name: copy httpd.conf config file
   template:
-    src: /etc/ansible/roles/polyglot.tomcat/files/httpd.conf
+    src: httpd.conf
     dest: /etc/httpd/conf/httpd.conf
 
 - name: restart httpd

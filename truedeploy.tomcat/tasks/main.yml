@@ -1,11 +1,10 @@
 ---
 # tasks file for polyglot.tomcat
----
+- name: update system
+  yum: name=* state=present
+
 - name: install epel repository && update system
   yum: name=epel-release state=present
-
-- name: Install Java
-  yum: name=java-1.8.0-openjdk-1.8.0.144-0.b01.el7_4.x86_64 state=present update_cache=yes
 
 - name: add group "tomcat"
   group: name=tomcat
@@ -24,23 +23,12 @@
 - name: give read permissinons of conf to tomcat
   file: path=/opt/tomcat/conf mode=0754
 
-
-
 - name: Install Tomcat init script
   copy: src=tomcat-initscript.sh dest=/etc/systemd/system/tomcat.service mode=0777
 
 - name: Start Tomcat
   service: name=tomcat state=started enabled=yes
 
-- name: httpd as reverse proxy
-  include: httpd.yml
-  tags: httpd
 
-- name: installing mariabd
-  include: mariadb.yml
-  tags: mariabd
 
-- name: downloading and uploading from nexus
-  include: nexus.yml
-  tags: nexus
 

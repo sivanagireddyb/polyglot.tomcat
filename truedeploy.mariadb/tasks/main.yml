@@ -1,6 +1,13 @@
 ---
+
+- name: update system
+  yum: name=* state=present
+
+- name: install epel repository && update system
+  yum: name=epel-release state=present
+
 - name: install mariadb-server
-  yum: name={{ item }} state=present
+  yum: name={{ item }} state=present update_cache=yes
   become: yes
   with_items:
      - mariadb-server

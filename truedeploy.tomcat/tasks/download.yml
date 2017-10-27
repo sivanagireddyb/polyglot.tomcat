@@ -5,5 +5,5 @@
 
 - name: extract tar file
   unarchive: src=/opt/apache-tomcat-8.0.47.tar.gz extra_opts="--strip-components=1" dest=/opt/tomcat remote_src=yes group=tomcat owner=tomcat
-~
+
 
