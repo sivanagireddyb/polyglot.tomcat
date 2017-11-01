@@ -1,0 +1,20 @@
+---
+# vars file for truedeploy.openldap
+
+#hostname vars
+ip_addr: 192.168.2.115
+host_name: truedeploy.com
+
+
+ldap_passwd: default123
+
+# db.ldif config variables
+domain: truedeploy
+suffix: com
+
+#ldap database
+ldap_password: default123 
+
+#crerating users
+user_name: ldapuser
+user_pass: default123 

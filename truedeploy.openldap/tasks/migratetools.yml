@@ -1,0 +1,36 @@
+---
+- name: filtering users from /etc/passwd
+  shell: "{{ item }}"
+  with_items:
+    - grep ":10[0-9][0-9]" /etc/passwd > /root/passwd
+    - grep ":10[0-9][0-9]" /etc/group > /root/group
+   
+
+- name: generate a ldif file for users & groups
+  shell: "{{ item }}"
+  args:
+    chdir: /usr/share/migrationtools/
+  with_items:
+    - "./migrate_passwd.pl /root/passwd /root/users.ldif"
+    - "./migrate_group.pl /root/group /root/group.ldif"
+
+#- name: import users to the ldap database
+#  expect:
+#    command: ldapadd -x -W -D "cn=manager,dc={{ domain }},dc={{ suffix }}" -f /root/base.ldif
+#    responses:
+#      (?i)enter ldap password: "{{ ldap_passwd }}" 
+    
+  
+- name: import users to the ldap database
+  expect:
+    command: ldapadd -x -W -D "cn=manager,dc={{ domain }},dc={{ suffix }}" -f /root/users.ldif 
+    responses:
+      (?i)enter ldap password: "{{ ldap_passwd }}"
+
+- name: import users to the ldap database
+  expect:
+    command: ldapadd -x -W -D "cn=manager,dc={{ domain }},dc={{ suffix }}" -f /root/groups.ldif 
+    responses:
+      (?i)enter ldap password: "{{ ldap_passwd }}"
+
+  
