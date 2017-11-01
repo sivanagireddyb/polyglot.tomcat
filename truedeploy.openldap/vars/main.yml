@@ -2,7 +2,7 @@
 # vars file for truedeploy.openldap
 
 #hostname vars
-ip_addr: 192.168.2.115
+ip_addr: 192.168.2.132
 host_name: truedeploy.com
 
 

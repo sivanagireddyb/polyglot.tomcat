@@ -14,12 +14,6 @@
     - "./migrate_passwd.pl /root/passwd /root/users.ldif"
     - "./migrate_group.pl /root/group /root/group.ldif"
 
-#- name: import users to the ldap database
-#  expect:
-#    command: ldapadd -x -W -D "cn=manager,dc={{ domain }},dc={{ suffix }}" -f /root/base.ldif
-#    responses:
-#      (?i)enter ldap password: "{{ ldap_passwd }}" 
-    
   
 - name: import users to the ldap database
   expect:

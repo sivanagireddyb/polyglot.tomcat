@@ -1,6 +1,10 @@
 ---
 # tasks file for truedeploy.openldap
 
+- name: install epel-release pkgs
+  yum: name=epel-release state=present
+  tags: epel
+
 - name: set hostname
   hostname: name=truedeploy.com
 
@@ -102,6 +106,10 @@
 - name: setting up ldap db by including database.yml
   include: database.yml
   tags: db
+
+- name: create objects in oenldap
+  include: baseobjects.yml
+  tags: objects
 
 - name: creating user
   include: users.yml
